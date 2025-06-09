@@ -29,9 +29,9 @@ const Footer = () => {
   <aside>
     
      
-      <NavLink to='/' className="btn btn-ghost text-xl font-semibold">Course <span className="w-10"><img src="/public/logo.png" alt="logo" /></span> STATION</NavLink>
+      <NavLink to='/' className="btn btn-ghost text-xl font-semibold">CoUrse <span className="w-10"><img src="/public/logo.png" alt="logo" /></span> STATION</NavLink>
     
-    <p>
+    <p className='ml-4'>
       Course Station Ltd.
       <br />
       Complete Guideline For Every Learning
@@ -51,7 +51,7 @@ const Footer = () => {
     </ul>
   </nav>
   <nav>
-    <h6 className="footer-title">Legal</h6>
+    <h6 className="footer-title">Social</h6>
     <a className="link link-hover">Terms of use</a>
     <a className="link link-hover">Privacy policy</a>
     <a className="link link-hover">Cookie policy</a>

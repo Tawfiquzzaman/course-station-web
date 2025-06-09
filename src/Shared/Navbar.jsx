@@ -5,22 +5,34 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to='/'>Home</NavLink>
+        <NavLink to="/" className="link link-hover">
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to=''>All Courses</NavLink>
+        <NavLink to="" className="link link-hover">
+          All Courses
+        </NavLink>
       </li>
       <li>
-        <NavLink to=''>Add Course</NavLink>
+        <NavLink to="" className="link link-hover">
+          Add Course
+        </NavLink>
       </li>
       <li>
-        <NavLink to=''>My Courses</NavLink>
+        <NavLink to="" className="link link-hover">
+          My Courses
+        </NavLink>
       </li>
       <li>
-        <NavLink to=''>Contact</NavLink>
+        <NavLink to="" className="link link-hover">
+          Contact
+        </NavLink>
       </li>
       <li>
-        <NavLink to=''>Career</NavLink>
+        <NavLink to="" className="link link-hover">
+          Career
+        </NavLink>
       </li>
     </>
   );
@@ -54,14 +66,20 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          
-          <NavLink to='/' className="btn btn-ghost text-xl font-semibold">Course <span className="w-10"><img src="/public/logo.png" alt="logo" /></span> STATION</NavLink>
+
+          <NavLink to="/" className="btn btn-ghost text-xl font-semibold lg:ml-10 md:ml-5">
+            CoUrse{" "}
+            <span className="w-10">
+              <img src="/public/logo.png" alt="logo" />
+            </span>{" "}
+            STATION
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn font-semibold bg-[#FF8282] rounded-full">Sign In</a>
+          <NavLink to='/login' className="btn font-semibold bg-[#FF8282] rounded-full">Sign In</NavLink>
         </div>
       </div>
     </div>
