@@ -3,10 +3,15 @@ import React, { use } from "react";
 import { Link } from "react-router";
 import loginAnimation from "../../assets/animation/loginanime.json"
 import { AuthContext } from "../../context/Authcontext/AuthContext";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../Firebase/firebase.init";
 
 const Login = () => {
 
+  const provider = new GoogleAuthProvider();
+
   const {signIn} = use(AuthContext);
+
 
   const handleLogin = e =>{
     e.preventDefault();
@@ -25,6 +30,19 @@ const Login = () => {
 
     
   }
+
+  //Google sign in
+  const handleGoogleSignIn = () => {
+    console.log('Google sign in clicked');
+
+    signInWithPopup(auth, provider)
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  };
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -57,7 +75,7 @@ const Login = () => {
               </div>
               <button className="btn bg-[#819A91] hover:bg-[#FCECDD] mt-4 eduvicfont rounded-full">Login</button>
               {/* Google */}
-                <button className="btn bg-white hover:bg-black hover:text-white text-black border-[#e5e5e5] rounded-full">
+                <button onClick={handleGoogleSignIn} className="btn bg-white hover:bg-black hover:text-white text-black border-[#e5e5e5] rounded-full">
                   <svg
                     aria-label="Google logo"
                     width="16"
