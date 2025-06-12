@@ -1,9 +1,31 @@
 import Lottie from "lottie-react";
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
 import loginAnimation from "../../assets/animation/loginanime.json"
+import { AuthContext } from "../../context/Authcontext/AuthContext";
 
 const Login = () => {
+
+  const {signIn} = use(AuthContext);
+
+  const handleLogin = e =>{
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+   signIn(email, password)
+   .then(result => {
+    console.log(result.user);
+   })
+   .catch(error => {
+    console.log(error);
+   })
+
+    
+  }
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse p-20">
@@ -17,11 +39,11 @@ const Login = () => {
         <div className="card bg-[#D1D8BE] w-full max-w-sm shrink-0 shadow-2xl">
             
           <div className="card-body">
-            <form className="fieldset">
+            <form className="fieldset" onSubmit={handleLogin}>
               <label className="label eduvicfont font-bold">Email</label>
-              <input type="email" className="input" placeholder="Email" />
+              <input name="email" type="email" className="input" placeholder="Email" />
               <label className="label eduvicfont font-bold">Password</label>
-              <input type="password" className="input" placeholder="Password" />
+              <input name="password" type="password" className="input" placeholder="Password" />
               <div>
                 <a className="link link-hover">Forgot password?</a>
               </div>

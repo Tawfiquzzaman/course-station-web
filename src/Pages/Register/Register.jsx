@@ -1,9 +1,32 @@
 import Lottie from 'lottie-react';
-import React from 'react';
+import React, { use } from 'react';
 import registerAnime from '../../assets/animation/regsiteranime.json'
 import { Link } from 'react-router';
+import { AuthContext } from '../../context/Authcontext/AuthContext';
 
 const Register = () => {
+
+    const {createUser} = use(AuthContext);
+
+  const handleRegister = e =>{
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    //create user with email and password
+    createUser(email, password)
+    .then(result => {
+      console.log(result.user)
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+    
+  }
+
     return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse p-20">
@@ -17,17 +40,17 @@ const Register = () => {
         <div className="card bg-[#D1D8BE] w-full max-w-sm shrink-0 shadow-2xl">
             
           <div className="card-body">
-            <form className="fieldset">
+            <form className="fieldset" onSubmit={handleRegister}>
               <label className="label eduvicfont font-bold">Name</label>
-              <input type="text" className="input" placeholder="Full Name" />
+              <input name='name' type="text" className="input" placeholder="Full Name" />
               <label className="label eduvicfont font-bold">Email</label>
-              <input type="email" className="input" placeholder="Email" />
+              <input name='email' type="email" className="input" placeholder="Email" />
               <label className="label eduvicfont font-bold">Photo URL</label>
-              <input type="text" className="input" placeholder="Photo URL" />
+              <input name='photoUrl' type="text" className="input" placeholder="Photo URL" />
               <label className="label eduvicfont font-bold">Password</label>
-              <input type="password" className="input" placeholder="Password" />
+              <input name='password' type="password" className="input" placeholder="Password" />
               <label className="label eduvicfont font-bold">Confirm Password</label>
-              <input type="password" className="input" placeholder="Confirm Your Password" />
+              <input name='confirmPass' type="password" className="input" placeholder="Confirm Your Password" />
               
               <div>
                 <p className="font-bold">

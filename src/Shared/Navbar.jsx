@@ -70,7 +70,7 @@ const Navbar = () => {
           <NavLink to="/" className="btn btn-ghost text-xl font-semibold lg:ml-10 md:ml-5">
             CoUrse{" "}
             <span className="w-10">
-              <img src="/public/logo.png" alt="logo" />
+              <img src="/logo.png" alt="logo" />
             </span>{" "}
             STATION
           </NavLink>

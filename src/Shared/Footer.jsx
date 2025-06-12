@@ -29,7 +29,7 @@ const Footer = () => {
   <aside>
     
      
-      <NavLink to='/' className="btn btn-ghost text-xl font-semibold">CoUrse <span className="w-10"><img src="/public/logo.png" alt="logo" /></span> STATION</NavLink>
+      <NavLink to='/' className="btn btn-ghost text-xl font-semibold">CoUrse <span className="w-10"><img src="/logo.png" alt="logo" /></span> STATION</NavLink>
     
     <p className='ml-4'>
       Course Station Ltd.
