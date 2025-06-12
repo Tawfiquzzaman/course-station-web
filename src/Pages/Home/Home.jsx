@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
+import Slider from "react-slick";
+import SimpleSlider from "../../SimpleSlider";
+
 
 const Home = () => {
     return (
         <div>
-            <h3>This is home</h3>
+            <SimpleSlider></SimpleSlider>
         </div>
     );
 };
