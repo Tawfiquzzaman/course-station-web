@@ -29,7 +29,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="" className="link link-hover">
+        <NavLink to="/addCourse" className="link link-hover">
           Add Course
         </NavLink>
       </li>

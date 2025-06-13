@@ -5,6 +5,7 @@ import RootLayout from "../Layouts/RootLayout";
 import Home from "../Pages/Home/Home";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/LoginPage/Login";
+import AddCourse from "../Pages/AddCourse/AddCourse";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
         {
           path: '/login',
           Component: Login,
+          
+        },
+        {
+          path: '/addCourse',
+          Component: AddCourse,
           
         }
     ]
