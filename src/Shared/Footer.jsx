@@ -14,7 +14,7 @@ const Footer = () => {
         <NavLink to='/addCourse' className="link link-hover">Add Course</NavLink>
       </li>
       <li>
-        <NavLink to='' className="link link-hover">My Courses</NavLink>
+        <NavLink to='/manageCourses' className="link link-hover">Manage Courses</NavLink>
       </li>
       <li>
         <NavLink to='' className="link link-hover">Contact</NavLink>

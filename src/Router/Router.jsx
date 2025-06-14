@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import Login from "../Pages/LoginPage/Login";
 import AddCourse from "../Pages/AddCourse/AddCourse";
 import AllCourses from "../Pages/AllCourses/AllCourses";
+import ManageMyCourse from "../Pages/ManageMyCourse/ManageMyCourse";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
           path: '/allCourses',
           loader: () => fetch('http://localhost:3000/courses'),
           Component: AllCourses,
+        },
+        {
+          path: '/manageCourses',
+          Component: ManageMyCourse,
+
         }
     ]
   },

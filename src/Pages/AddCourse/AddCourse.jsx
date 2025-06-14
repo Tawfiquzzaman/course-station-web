@@ -1,36 +1,56 @@
 import Lottie from "lottie-react";
-import React from "react";
+import React, { useContext } from "react";
 import addGroup from "../../assets/animation/addGroup.json";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/Authcontext/AuthContext";
 
 const AddCourse = () => {
-  const handleAddCourse = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const courseData = Object.fromEntries(formData.entries());
-    console.log(courseData);
 
-    //Send data to database
-    fetch("http://localhost:3000/courses", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(courseData),
+  const {user} = useContext(AuthContext);
+  
+
+  const handleAddCourse = (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const courseData = Object.fromEntries(formData.entries());
+
+  if (user?.email) {
+    courseData.creatorEmail = user.email;
+    courseData.creatorName = user.displayName || "Anonymous";
+  } else {
+    Swal.fire({
+      title: "User not logged in!",
+      icon: "error",
+    });
+    return;
+  }
+
+  fetch("http://localhost:3000/courses", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(courseData),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.insertedId) {
+        Swal.fire({
+          title: "Course Added Successfully!",
+          icon: "success",
+        });
+        form.reset();
+      }
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertrdId) {
-          console.log("Course Added Successfully");
-          Swal.fire({
-            title: "Course Added Successfully!",
-            icon: "success",
-            draggable: true,
-          });
-        }
+    .catch((err) => {
+      console.error("Error:", err);
+      Swal.fire({
+        title: "Something went wrong!",
+        icon: "error",
       });
-  };
+    });
+};
 
   return (
     <div className="p-20">

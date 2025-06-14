@@ -34,8 +34,8 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="" className="link link-hover">
-          My Courses
+        <NavLink to="/manageCourses" className="link link-hover">
+          Manage Courses
         </NavLink>
       </li>
       <li>
