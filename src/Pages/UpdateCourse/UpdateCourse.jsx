@@ -2,6 +2,7 @@ import Lottie from "lottie-react";
 import React from "react";
 import update from "../../assets/animation/update.json";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const UpdateCourse = () => {
   const { title, imageURL, duration, description, _id } = useLoaderData();
@@ -9,24 +10,27 @@ const UpdateCourse = () => {
   const handleUpdateCourse = (e) => {
     e.preventDefault();
     const form = e.target;
-    const updatedCourse = {
-      title: form.title.value,
-      imageURL: form.imageURL.value,
-      duration: form.duration.value,
-      description: form.description.value,
-    };
+    const formData = new FormData(form);
+    const updatedCourse = Object.fromEntries(formData.entries());
+    console.log(updatedCourse);
 
     fetch(`http://localhost:3000/courses/${_id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
       },
       body: JSON.stringify(updatedCourse),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount > 0) {
-          alert("Course updated successfully!");
+        if (data.modifiedCount) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Course Info Updated Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   };
