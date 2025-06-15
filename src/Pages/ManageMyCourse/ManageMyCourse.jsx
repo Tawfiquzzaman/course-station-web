@@ -3,16 +3,56 @@ import { AuthContext } from "../../context/Authcontext/AuthContext";
 import axios from "axios";
 import SingleCourse from "../SingleCourse/SingleCourse";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
+import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const ManageMyCourse = () => {
   const { user } = useContext(AuthContext);
   const [myCourses, setMyCourses] = useState([]);
 
+  const handleEdit = (_id) => {
+    console.log(_id);
+  }
+
+
+  const handleDelete = (_id) => {
+    console.log(_id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //Delete operation
+
+        fetch(`http://localhost:3000/courses/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: `The Course ${user.title} has been Deleted!`,
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
 
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/courses?creatorEmail=${user.email}`)
+        .get(
+          `http://localhost:3000/courses?creatorEmail=${user.email}`
+        )
         .then((res) => {
           setMyCourses(res.data);
         })
@@ -68,11 +108,13 @@ const ManageMyCourse = () => {
                     )}
                   </td>
                   <td className="py-3 px-6 space-x-4 flex items-center">
+                    <Link to= {`/updateCourse/${course._id}`}>
                     <FiEdit
                       onClick={() => handleEdit(course._id)}
                       className="text-blue-600 hover:text-blue-800 cursor-pointer text-xl"
                       title="Edit"
-                    />
+                      
+                    /></Link>
                     <FiTrash2
                       onClick={() => handleDelete(course._id)}
                       className="text-red-600 hover:text-red-800 cursor-pointer text-xl"
