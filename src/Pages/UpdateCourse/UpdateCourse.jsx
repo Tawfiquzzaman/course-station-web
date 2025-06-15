@@ -1,19 +1,38 @@
-import Lottie from 'lottie-react';
-import React from 'react';
-import update from '../../assets/animation/update.json'
-import { useLoaderData } from 'react-router';
+import Lottie from "lottie-react";
+import React from "react";
+import update from "../../assets/animation/update.json";
+import { useLoaderData } from "react-router";
 
 const UpdateCourse = () => {
+  const { title, imageURL, duration, description, _id } = useLoaderData();
 
-    const {title, imageURL, duration, description, _id} = useLoaderData()
+  const handleUpdateCourse = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const updatedCourse = {
+      title: form.title.value,
+      imageURL: form.imageURL.value,
+      duration: form.duration.value,
+      description: form.description.value,
+    };
 
-    const handleUpdateCourse = (_id) => {
-        
-        console.log(_id)
-    }
+    fetch(`http://localhost:3000/courses/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedCourse),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          alert("Course updated successfully!");
+        }
+      });
+  };
 
-    return (
-        <div className="p-20">
+  return (
+    <div className="p-20">
       <h1 className="text-5xl text-center font-bold eduvicfont">
         Fill The Form To Update Course
       </h1>
@@ -78,7 +97,7 @@ const UpdateCourse = () => {
         </form>
       </div>
     </div>
-    );
+  );
 };
 
 export default UpdateCourse;
