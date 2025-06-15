@@ -39,8 +39,8 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="" className="link link-hover">
-          Contact
+        <NavLink to="/myEnrolledCourses" className="link link-hover">
+          Enrolled Courses
         </NavLink>
       </li>
       <li>
