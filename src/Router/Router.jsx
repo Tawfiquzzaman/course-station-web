@@ -11,6 +11,8 @@ import ManageMyCourse from "../Pages/ManageMyCourse/ManageMyCourse";
 import UpdateCourse from "../Pages/UpdateCourse/UpdateCourse";
 import CourseDetails from "../Pages/CourseDetails/CourseDetails";
 import EnrolledCourses from "../Pages/EnrolledCourses/EnrolledCourses";
+import PrivateRoute from "./PrivateRoute";
+import Error from "../Pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,7 @@ const router = createBrowserRouter([
         {
             index: true,
             Component: Home,
+            errorElement: <Error></Error>
         },
         {
           path: '/register',
@@ -33,32 +36,38 @@ const router = createBrowserRouter([
         },
         {
           path: '/addCourse',
-          Component: AddCourse,
+          // Component: AddCourse,
+          element: <PrivateRoute><AddCourse></AddCourse></PrivateRoute>
           
         },
         {
           path: '/allCourses',
-          loader: () => fetch('http://localhost:3000/courses'),
+          loader: () => fetch('https://course-station-server.vercel.app/courses'),
           Component: AllCourses,
+          errorElement: <Error />,
         },
         {
           path: '/manageCourses',
-          Component: ManageMyCourse,
+          // Component: ManageMyCourse,
+          element: <PrivateRoute><ManageMyCourse></ManageMyCourse></PrivateRoute>
+    
 
         },
         {
           path: '/updateCourse/:id',
-          loader: ({params}) => fetch(`http://localhost:3000/courses/${params.id}`),
-          Component: UpdateCourse,
+          loader: ({params}) => fetch(`https://course-station-server.vercel.app/courses/${params.id}`),
+          // Component: UpdateCourse,
+          element: <PrivateRoute><UpdateCourse></UpdateCourse></PrivateRoute>
         },
         {
           path: '/courseDetails/:id',
-          loader: ({params}) => fetch(`http://localhost:3000/courses/${params.id}`),
+          loader: ({params}) => fetch(`https://course-station-server.vercel.app/courses/${params.id}`),
           Component: CourseDetails,
         },
         {
           path: '/myEnrolledCourses',
-          Component: EnrolledCourses,
+          // Component: EnrolledCourses,
+          element: <PrivateRoute><EnrolledCourses></EnrolledCourses></PrivateRoute>
         }
     ]
   },

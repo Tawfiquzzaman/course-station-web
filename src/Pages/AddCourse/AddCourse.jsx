@@ -26,7 +26,7 @@ const AddCourse = () => {
     return;
   }
 
-  fetch("http://localhost:3000/courses", {
+  fetch("https://course-station-server.vercel.app/courses", {
     method: "POST",
     headers: {
       "content-type": "application/json",
