@@ -18,6 +18,8 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <Error></Error>,
+    
     children: [
         {
             index: true,
@@ -27,17 +29,20 @@ const router = createBrowserRouter([
         {
           path: '/register',
           Component: Register,
+          errorElement: <Error></Error>
 
         },
         {
           path: '/login',
           Component: Login,
+          errorElement: <Error></Error>
           
         },
         {
           path: '/addCourse',
           // Component: AddCourse,
-          element: <PrivateRoute><AddCourse></AddCourse></PrivateRoute>
+          element: <PrivateRoute><AddCourse></AddCourse></PrivateRoute>,
+          errorElement: <Error></Error>
           
         },
         {
@@ -49,7 +54,8 @@ const router = createBrowserRouter([
         {
           path: '/manageCourses',
           // Component: ManageMyCourse,
-          element: <PrivateRoute><ManageMyCourse></ManageMyCourse></PrivateRoute>
+          element: <PrivateRoute><ManageMyCourse></ManageMyCourse></PrivateRoute>,
+          errorElement: <Error></Error>
     
 
         },
@@ -57,7 +63,8 @@ const router = createBrowserRouter([
           path: '/updateCourse/:id',
           loader: ({params}) => fetch(`http://localhost:3000/courses/${params.id}`),
           // Component: UpdateCourse,
-          element: <PrivateRoute><UpdateCourse></UpdateCourse></PrivateRoute>
+          element: <PrivateRoute><UpdateCourse></UpdateCourse></PrivateRoute>,
+          errorElement: <Error></Error>
         },
         {
           path: '/courseDetails/:id',
@@ -68,7 +75,8 @@ const router = createBrowserRouter([
         {
           path: '/myEnrolledCourses',
           // Component: EnrolledCourses,
-          element: <PrivateRoute><EnrolledCourses></EnrolledCourses></PrivateRoute>
+          element: <PrivateRoute><EnrolledCourses></EnrolledCourses></PrivateRoute>,
+          errorElement: <Error></Error>
         }
     ]
   },
