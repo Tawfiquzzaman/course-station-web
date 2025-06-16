@@ -19,7 +19,7 @@ const CourseDetails = () => {
     console.log(enrollment);
 
     axios
-      .post("https://course-station-server.vercel.app/enrollments", enrollment)
+      .post("http://localhost:3000/enrollments", enrollment)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

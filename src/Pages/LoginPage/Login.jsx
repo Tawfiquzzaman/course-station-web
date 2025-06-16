@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
-import React, { use } from "react";
-import { Link } from "react-router";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router";
 import loginAnimation from "../../assets/animation/loginanime.json"
 import { AuthContext } from "../../context/Authcontext/AuthContext";
 import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -11,7 +11,9 @@ const Login = () => {
   const provider = new GoogleAuthProvider();
   const providerGithub = new GithubAuthProvider();
 
-  const { signIn } = use(AuthContext);
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
 
 
   const handleLogin = e => {
@@ -24,6 +26,7 @@ const Login = () => {
     signIn(email, password)
       .then(result => {
         console.log(result.user);
+        navigate('/');
       })
       .catch(error => {
         console.log(error);
@@ -39,6 +42,7 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then(result => {
         console.log(result);
+        navigate('/');
       })
       .catch(error => {
         console.log(error);
@@ -52,6 +56,7 @@ const Login = () => {
     signInWithPopup(auth, providerGithub)
     .then(result => {
       console.log(result);
+      navigate('/');
     })
     .catch(error => {
       console.log(error);

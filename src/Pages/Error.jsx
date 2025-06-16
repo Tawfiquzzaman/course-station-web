@@ -1,5 +1,6 @@
 import React from 'react';
 import error from '../assets/animation/error.json'
+import Lottie from 'lottie-react';
 
 const Error = () => {
     return (
