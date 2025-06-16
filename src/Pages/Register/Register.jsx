@@ -60,7 +60,7 @@ const Register = () => {
                     </Link>
                   </p>
               </div>
-              <button className="btn bg-[#819A91] hover:bg-[#FCECDD] mt-4 eduvicfont rounded-full">Login</button>
+              <button className="btn bg-[#819A91] hover:bg-[#FCECDD] mt-4 eduvicfont rounded-full">Register</button>
               {/* Google */}
                 <button className="btn bg-white hover:bg-black hover:text-white text-black border-[#e5e5e5] rounded-full">
                   <svg
