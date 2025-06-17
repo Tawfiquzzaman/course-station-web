@@ -74,6 +74,71 @@ const Home = () => {
           {popularCourses.map(renderCourseCard)}
         </div>
       </div>
+
+      {/* Why Choose Us Section */}
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <h1 className="text-3xl text-center mb-5 font-bold eduvicfont">
+          Why Choose Course Station?
+        </h1>
+        <div className="border-b-1 opacity-45 border-dashed mb-5"></div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+            <h3 className="text-xl font-semibold mb-2">Expert Instructors</h3>
+            <p className="text-gray-600">
+              Learn from industry professionals with real-world experience.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+            <h3 className="text-xl font-semibold mb-2">Flexible Learning</h3>
+            <p className="text-gray-600">
+              Study at your own pace with lifetime access to all course
+              materials.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+            <h3 className="text-xl font-semibold mb-2">
+              Verified Certificates
+            </h3>
+            <p className="text-gray-600">
+              Get recognized with certificates after successful course
+              completion.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* How It Works Section */}
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <h1 className="text-3xl text-center mb-5 font-bold eduvicfont">
+          How It Works
+        </h1>
+        <div className="border-b-1 opacity-45 border-dashed mb-5"></div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+            <div className="text-5xl mb-3 text-[#6C63FF] font-bold">1</div>
+            <h3 className="text-xl font-semibold mb-2">Sign Up & Explore</h3>
+            <p className="text-gray-600">
+              Create your account and browse hundreds of curated courses.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+            <div className="text-5xl mb-3 text-[#6C63FF] font-bold">2</div>
+            <h3 className="text-xl font-semibold mb-2">Enroll & Learn</h3>
+            <p className="text-gray-600">
+              Choose a course and start learning at your own pace, anytime.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+            <div className="text-5xl mb-3 text-[#6C63FF] font-bold">3</div>
+            <h3 className="text-xl font-semibold mb-2">Get Certified</h3>
+            <p className="text-gray-600">
+              Complete the course and receive your certificate of completion.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
