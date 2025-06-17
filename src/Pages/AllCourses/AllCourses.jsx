@@ -17,7 +17,7 @@ const AllCourses = () => {
   if(loading) return <Loading></Loading>;
 
   return (
-    <div className="p-5 md:p-10 lg:p-20">
+    <div className="p-5 md:p-10 lg:p-20 mt-16">
       <Helmet>
         <title>All Courses</title>
       </Helmet>

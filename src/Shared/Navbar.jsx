@@ -3,20 +3,19 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../context/Authcontext/AuthContext";
 
 const Navbar = () => {
-
-  const {user, signOutUser} = use(AuthContext);
+  const { user, signOutUser } = use(AuthContext);
 
   const handleSignOut = () => {
     signOutUser()
-    .then(() => {
-      console.log('Signed Out User')
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
+      .then(() => {
+        console.log("Signed Out User");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  const links = (
+  const publicLinks = (
     <>
       <li>
         <NavLink to="/" className="link link-hover">
@@ -28,6 +27,17 @@ const Navbar = () => {
           All Courses
         </NavLink>
       </li>
+      <li>
+        <NavLink to="" className="link link-hover">
+          Career
+        </NavLink>
+      </li>
+    </>
+  );
+
+  // Links visible only after login (private)
+  const privateLinks = (
+    <>
       <li>
         <NavLink to="/addCourse" className="link link-hover">
           Add Course
@@ -41,11 +51,6 @@ const Navbar = () => {
       <li>
         <NavLink to="/myEnrolledCourses" className="link link-hover">
           Enrolled Courses
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="" className="link link-hover">
-          Career
         </NavLink>
       </li>
     </>
@@ -77,20 +82,27 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-[#E8F9FF] rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              {links}
+              {publicLinks}
+              {user && privateLinks}
             </ul>
           </div>
 
-          <NavLink to="/" className="btn btn-ghost text-xl font-semibold lg:ml-10 md:ml-5">
+          <NavLink
+            to="/"
+            className="btn btn-ghost text-sm md:text-lg lg:text-xl font-semibold lg:ml-10 md:ml-5"
+          >
             CoUrse{" "}
-            <span className="w-10">
+            <span className="w-6 md:w-8 lg:w-10">
               <img src="/logo.png" alt="logo" />
             </span>{" "}
             STATION
           </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className="menu menu-horizontal px-1">
+            {publicLinks}
+            {user && privateLinks}
+          </ul>
         </div>
         <div className="navbar-end space-x-2 mr-4">
           {user ? (
@@ -105,12 +117,18 @@ const Navbar = () => {
               )}
 
               {/* Sign Out Button */}
-              <button onClick={handleSignOut} className="btn font-semibold bg-[#FF8282] rounded-full">
+              <button
+                onClick={handleSignOut}
+                className="btn font-semibold bg-[#FF8282] rounded-full"
+              >
                 Sign Out
               </button>
             </div>
           ) : (
-            <NavLink to="/login" className="btn font-semibold bg-[#FFB823] rounded-full">
+            <NavLink
+              to="/login"
+              className="btn font-semibold bg-[#FFB823] rounded-full"
+            >
               Sign In
             </NavLink>
           )}

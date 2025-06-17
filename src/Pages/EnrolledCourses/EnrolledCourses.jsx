@@ -27,7 +27,7 @@ const EnrolledCourses = () => {
   };
 
   return (
-    <div className="p-5 md:p-10">
+    <div className="p-5 md:p-10 mt-16">
       <Helmet>
         <title>Enrolled Courses</title>
       </Helmet>

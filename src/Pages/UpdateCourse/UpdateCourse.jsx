@@ -38,7 +38,7 @@ const UpdateCourse = () => {
   };
 
   return (
-    <div className="p-20">
+    <div className="p-10 mt-15 md:p-20 md:mt-10">
       <Helmet>
         <title>Update Course</title>
       </Helmet>
@@ -48,7 +48,7 @@ const UpdateCourse = () => {
 
       <div className="p-5 bg-[#D1D8BE] rounded-2xl my-10">
         <div className="text-center lg:text-left">
-          <div className="w-100 mx-auto">
+          <div className="w-70 md:w-100 md:mx-auto">
             <Lottie loop={true} animationData={update}></Lottie>
           </div>
         </div>

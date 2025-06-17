@@ -95,25 +95,30 @@ const CourseDetails = () => {
               timer: 1500,
             });
             setIsEnrolled(true);
-            setEnrollmentId(res.data.insertedId); // Store new ID
+            setEnrollmentId(res.data.insertedId);
           }
         })
         .catch((err) => {
-          if (
-            err.response?.status === 409 &&
-            err.response?.data?.message === "No seats left"
-          ) {
+          const msg = err.response?.data?.message;
+          if (msg === "No seats left") {
             Swal.fire({
               title: "No seats left!",
               icon: "error",
             });
-          } else if (
-            err.response?.status === 409 &&
-            err.response?.data?.message === "Already enrolled"
-          ) {
+          } else if (msg === "Already enrolled") {
             Swal.fire({
               title: "You Already Enrolled",
               icon: "error",
+            });
+          } else if (msg === "You cannot enroll in more than 3 courses") {
+            Swal.fire({
+              toast: true,
+              position: "top-end",
+              icon: "warning",
+              title: msg,
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
             });
           } else {
             Swal.fire({
