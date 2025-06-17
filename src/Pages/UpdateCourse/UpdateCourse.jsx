@@ -6,14 +6,15 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const UpdateCourse = () => {
-  const { title, imageURL, duration, description, _id } = useLoaderData();
+  const { title, imageURL, duration, description, _id, totalSeats } = useLoaderData();
 
   const handleUpdateCourse = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const updatedCourse = Object.fromEntries(formData.entries());
-    console.log(updatedCourse);
+    updatedCourse.totalSeats = parseInt(updatedCourse.totalSeats);
+    
 
     fetch(`http://localhost:3000/courses/${_id}`, {
       method: "PUT",
@@ -84,6 +85,18 @@ const UpdateCourse = () => {
                 placeholder="Enter Course Duration"
                 name="duration"
                 defaultValue={duration}
+              />
+            </fieldset>
+            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+              <label className="label eduvicfont font-bold">Total Seats</label>
+              <input
+                type="number"
+                className="input w-full"
+                placeholder="Enter Total Seats"
+                name="totalSeats"
+                defaultValue={totalSeats}
+                min="1"
+                required
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">

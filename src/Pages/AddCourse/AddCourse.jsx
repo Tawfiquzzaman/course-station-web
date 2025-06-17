@@ -6,52 +6,51 @@ import { AuthContext } from "../../context/Authcontext/AuthContext";
 import { Helmet } from "react-helmet";
 
 const AddCourse = () => {
-
-  const {user} = useContext(AuthContext);
-  
+  const { user } = useContext(AuthContext);
 
   const handleAddCourse = (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const formData = new FormData(form);
-  const courseData = Object.fromEntries(formData.entries());
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const courseData = Object.fromEntries(formData.entries());
+    courseData.totalSeats = parseInt(courseData.totalSeats);
 
-  if (user?.email) {
-    courseData.creatorEmail = user.email;
-    courseData.creatorName = user.displayName || "Anonymous";
-  } else {
-    Swal.fire({
-      title: "User not logged in!",
-      icon: "error",
-    });
-    return;
-  }
-
-  fetch("http://localhost:3000/courses", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(courseData),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.insertedId) {
-        Swal.fire({
-          title: "Course Added Successfully!",
-          icon: "success",
-        });
-        form.reset();
-      }
-    })
-    .catch((err) => {
-      console.error("Error:", err);
+    if (user?.email) {
+      courseData.creatorEmail = user.email;
+      courseData.creatorName = user.displayName || "Anonymous";
+    } else {
       Swal.fire({
-        title: "Something went wrong!",
+        title: "User not logged in!",
         icon: "error",
       });
-    });
-};
+      return;
+    }
+
+    fetch("http://localhost:3000/courses", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(courseData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Course Added Successfully!",
+            icon: "success",
+          });
+          form.reset();
+        }
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        Swal.fire({
+          title: "Something went wrong!",
+          icon: "error",
+        });
+      });
+  };
 
   return (
     <div className="p-10 mt-15 md:p-20 md:mt-10">
@@ -98,6 +97,17 @@ const AddCourse = () => {
                 className="input w-full"
                 placeholder="Enter Course Duration"
                 name="duration"
+              />
+            </fieldset>
+            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+              <label className="label eduvicfont font-bold">Total Seats</label>
+              <input
+                type="number"
+                min="1"
+                required
+                className="input w-full"
+                placeholder="Enter Total Seats"
+                name="totalSeats"
               />
             </fieldset>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">

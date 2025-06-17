@@ -13,6 +13,7 @@ const CourseDetails = () => {
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [checkingEnrollment, setCheckingEnrollment] = useState(true);
   const [seatsLeft, setSeatsLeft] = useState(null);
+  const [enrollmentId, setEnrollmentId] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -27,6 +28,9 @@ const CourseDetails = () => {
       )
       .then((res) => {
         setIsEnrolled(res.data.enrolled);
+        if (res.data.enrollmentId) {
+          setEnrollmentId(res.data.enrollmentId);
+        }
       })
       .catch((err) => {
         console.error("Error checking enrollment:", err);
@@ -49,52 +53,76 @@ const CourseDetails = () => {
   }, [_id, isEnrolled]);
 
   const handleEnroll = () => {
-    const enrollment = {
-      userEmail: user.email,
-      courseBanner: imageURL,
-      courseId: _id,
-      courseName: title,
-      enrolledDate: new Date(),
-    };
-
-    axios
-      .post("http://localhost:3000/enrollments", enrollment)
-      .then((res) => {
-        if (res.data.insertedId) {
+    if (isEnrolled) {
+      // UNENROLL
+      axios
+        .delete(`http://localhost:3000/enrollments/${enrollmentId}`)
+        .then(() => {
           Swal.fire({
-            position: "bottom",
+            title: "Enrollment removed",
             icon: "success",
-            title: "Congratulations!! Enrolled Successfully",
-            showConfirmButton: false,
             timer: 1500,
+            showConfirmButton: false,
           });
-          setIsEnrolled(true);
-        } else {
+          setIsEnrolled(false);
+          setEnrollmentId(null);
+        })
+        .catch(() => {
           Swal.fire({
-            title: "You Already Enrolled",
+            title: "Failed to unenroll",
             icon: "error",
-            draggable: true,
           });
-        }
-      })
-      .catch((err) => {
-        if (
-          err.response?.status === 409 &&
-          err.response?.data?.message === "No seats left"
-        ) {
-          Swal.fire({
-            title: "No seats left!",
-            icon: "error",
-            confirmButtonText: "Okay",
-          });
-        } else {
-          Swal.fire({
-            title: "Something Went Wrong!",
-            icon: "error",
-            draggable: true,
-          });
-        }
-      });
+        });
+    } else {
+      // ENROLL
+      const enrollment = {
+        userEmail: user.email,
+        courseBanner: imageURL,
+        courseId: _id,
+        courseName: title,
+        enrolledDate: new Date(),
+      };
+
+      axios
+        .post("http://localhost:3000/enrollments", enrollment)
+        .then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "bottom",
+              icon: "success",
+              title: "Congratulations!! Enrolled Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setIsEnrolled(true);
+            setEnrollmentId(res.data.insertedId); // Store new ID
+          }
+        })
+        .catch((err) => {
+          if (
+            err.response?.status === 409 &&
+            err.response?.data?.message === "No seats left"
+          ) {
+            Swal.fire({
+              title: "No seats left!",
+              icon: "error",
+            });
+          } else if (
+            err.response?.status === 409 &&
+            err.response?.data?.message === "Already enrolled"
+          ) {
+            Swal.fire({
+              title: "You Already Enrolled",
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "Something Went Wrong!",
+              icon: "error",
+            });
+          }
+        });
+    }
   };
 
   if (checkingEnrollment) return <Loading />;
@@ -111,7 +139,8 @@ const CourseDetails = () => {
         <div className="card-body items-center text-center">
           <h2 className="card-title mt-2">{title}</h2>
           <button className="mt-2 btn btn-soft btn-warning">
-            Course Duration : <span className="font-bold">{duration}</span>
+            Course Duration :{" "}
+            <span className="font-bold text-blue-500">{duration} Months</span>
           </button>
           <p className="my-5">{description}</p>
           {seatsLeft === 0 ? (
@@ -128,43 +157,23 @@ const CourseDetails = () => {
               <button
                 onClick={handleEnroll}
                 className="btn bg-[#819A91] hover:bg-[#FCECDD] mt-3"
-                disabled={!user || isEnrolled || checkingEnrollment}
+                disabled={!user || checkingEnrollment}
                 title={
                   !user
                     ? "You must be logged in to enroll"
-                    : isEnrolled
-                    ? "You have already enrolled in this course"
+                    : checkingEnrollment
+                    ? "Checking enrollment..."
                     : ""
                 }
               >
-                {isEnrolled
-                  ? "Enrolled"
-                  : checkingEnrollment
+                {checkingEnrollment
                   ? "Checking..."
+                  : isEnrolled
+                  ? "Unenroll"
                   : "Enroll Now"}
               </button>
             </div>
           )}
-          <div className="card-actions">
-            <button
-              onClick={handleEnroll}
-              className="btn bg-[#819A91] hover:bg-[#FCECDD] mt-3"
-              disabled={!user || isEnrolled || checkingEnrollment}
-              title={
-                !user
-                  ? "You must be logged in to enroll"
-                  : isEnrolled
-                  ? "You have already enrolled in this course"
-                  : ""
-              }
-            >
-              {isEnrolled
-                ? "Enrolled"
-                : checkingEnrollment
-                ? "Checking..."
-                : "Enroll Now"}
-            </button>
-          </div>
         </div>
       </div>
     </div>
