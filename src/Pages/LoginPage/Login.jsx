@@ -20,6 +20,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (e) => {
@@ -92,12 +94,51 @@ const Login = () => {
                 placeholder="Email"
               />
               <label className="label eduvicfont font-bold">Password</label>
-              <input
-                name="password"
-                type="password"
-                className="input"
-                placeholder="Password"
-              />
+              <div className="relative">
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  className="input w-full pr-10"
+                  placeholder="Password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600"
+                >
+                  {showPassword ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10 0-.94.13-1.85.375-2.713m3.153 2.58A5.975 5.975 0 0012 18c1.14 0 2.199-.32 3.097-.874M19.425 15.997A9.964 9.964 0 0021 12c0-5.523-4.477-10-10-10-.637 0-1.26.061-1.867.18"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm4.243 4.243A9.956 9.956 0 0021 12a9.956 9.956 0 00-1.757-5.757m-2.122 2.122A5.978 5.978 0 0012 6c-1.14 0-2.199.32-3.097.874M6.343 6.343A9.956 9.956 0 003 12c0 5.523 4.477 10 10 10 1.393 0 2.716-.292 3.9-.817"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
               <div>
                 <a className="link link-hover">Forgot password?</a>
               </div>

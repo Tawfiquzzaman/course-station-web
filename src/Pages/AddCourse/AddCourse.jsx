@@ -26,7 +26,7 @@ const AddCourse = () => {
     return;
   }
 
-  fetch("http://localhost:3000/courses", {
+  fetch("https://course-station-server.vercel.app/courses", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -53,14 +53,14 @@ const AddCourse = () => {
 };
 
   return (
-    <div className="p-20">
+    <div className="p-10 mt-15 md:p-20 md:mt-10">
       <h1 className="text-5xl text-center font-bold eduvicfont">
         Fill The Form To Add New Course
       </h1>
 
-      <div className="p-5 bg-[#D1D8BE] rounded-2xl my-10">
+      <div className="p-5 md:p-5 bg-[#D1D8BE] rounded-2xl my-10">
         <div className="text-center lg:text-left">
-          <div className="w-100 mx-auto">
+          <div className="w-70 md:w-100 md:mx-auto">
             <Lottie loop={true} animationData={addGroup}></Lottie>
           </div>
         </div>

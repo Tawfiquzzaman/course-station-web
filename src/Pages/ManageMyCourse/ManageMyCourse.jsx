@@ -30,7 +30,7 @@ const ManageMyCourse = () => {
       if (result.isConfirmed) {
         //Delete operation
 
-        fetch(`http://localhost:3000/courses/${_id}`, {
+        fetch(`https://course-station-server.vercel.app/courses/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -51,7 +51,7 @@ const ManageMyCourse = () => {
     if (user?.email) {
       axios
         .get(
-          `http://localhost:3000/courses?creatorEmail=${user.email}`
+          `https://course-station-server.vercel.app/courses?creatorEmail=${user.email}`
         )
         .then((res) => {
           setMyCourses(res.data);

@@ -14,7 +14,7 @@ const UpdateCourse = () => {
     const updatedCourse = Object.fromEntries(formData.entries());
     console.log(updatedCourse);
 
-    fetch(`http://localhost:3000/courses/${_id}`, {
+    fetch(`https://course-station-server.vercel.app/courses/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

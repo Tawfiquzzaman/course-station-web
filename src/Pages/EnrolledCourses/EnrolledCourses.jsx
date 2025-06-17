@@ -9,7 +9,7 @@ const EnrolledCourses = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/enrollments?email=${user.email}`)
+        .get(`https://course-station-server.vercel.app/enrollments?email=${user.email}`)
         .then((res) => setEnrollments(res.data))
         .catch((err) => console.error(err));
     }
@@ -17,7 +17,7 @@ const EnrolledCourses = () => {
 
   const handleRemove = (id) => {
     if (window.confirm("Remove this enrollment?")) {
-      axios.delete(`http://localhost:3000/enrollments/${id}`).then((res) => {
+      axios.delete(`https://course-station-server.vercel.app/enrollments/${id}`).then((res) => {
         if (res.data.deletedCount > 0) {
           setEnrollments((prev) => prev.filter((item) => item._id !== id));
         }

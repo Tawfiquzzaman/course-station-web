@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
     const links = (
@@ -52,9 +53,17 @@ const Footer = () => {
   </nav>
   <nav>
     <h6 className="footer-title">Social</h6>
-    <a className="link link-hover">Terms of use</a>
-    <a className="link link-hover">Privacy policy</a>
-    <a className="link link-hover">Cookie policy</a>
+    <div className="flex gap-4 mt-2">
+    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-xl text-blue-600 hover:text-blue-800">
+      <FaFacebook />
+    </a>
+    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-800 hover:text-black">
+      <FaGithub />
+    </a>
+    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-xl text-blue-700 hover:text-blue-900">
+      <FaLinkedin />
+    </a>
+  </div>
   </nav>
 </footer>
     );
