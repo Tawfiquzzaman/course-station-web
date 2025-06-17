@@ -35,7 +35,7 @@ const AuthProvider = ({children}) => {
         setLoading(false);
         if(currentUser?.email){
             const userData = {email: currentUser.email};
-            axios.post('http://localhost:3000/jwt', userData)
+            axios.post('https://course-station-server.vercel.app/jwt', userData)
             .then(res => {
                 console.log('Token After JWT',res.data);
                 const token = res.data.token;

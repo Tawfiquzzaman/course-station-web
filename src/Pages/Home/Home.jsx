@@ -12,13 +12,13 @@ const Home = () => {
   useEffect(() => {
     // Fetch Latest Courses
     axios
-      .get("http://localhost:3000/courses?latest=true")
+      .get("https://course-station-server.vercel.app/courses?latest=true")
       .then((res) => setLatestCourses(res.data))
       .catch((err) => console.error(err));
 
     // Fetch Popular Courses
     axios
-      .get("http://localhost:3000/courses?popular=true")
+      .get("https://course-station-server.vercel.app/courses?popular=true")
       .then((res) => setPopularCourses(res.data))
       .catch((err) => console.error(err));
   }, []);

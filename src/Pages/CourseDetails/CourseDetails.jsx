@@ -24,7 +24,7 @@ const CourseDetails = () => {
 
     axios
       .get(
-        `http://localhost:3000/enrollments/check?userEmail=${user.email}&courseId=${_id}`
+        `https://course-station-server.vercel.app/enrollments/check?userEmail=${user.email}&courseId=${_id}`
       )
       .then((res) => {
         setIsEnrolled(res.data.enrolled);
@@ -42,7 +42,7 @@ const CourseDetails = () => {
   // Fetch seats left
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/courses/${_id}/seats`)
+      .get(`https://course-station-server.vercel.app/courses/${_id}/seats`)
       .then((res) => {
         setSeatsLeft(res.data.seatsLeft);
       })
@@ -56,7 +56,7 @@ const CourseDetails = () => {
     if (isEnrolled) {
       // UNENROLL
       axios
-        .delete(`http://localhost:3000/enrollments/${enrollmentId}`)
+        .delete(`https://course-station-server.vercel.app/enrollments/${enrollmentId}`)
         .then(() => {
           Swal.fire({
             title: "Enrollment removed",
@@ -84,7 +84,7 @@ const CourseDetails = () => {
       };
 
       axios
-        .post("http://localhost:3000/enrollments", enrollment)
+        .post("https://course-station-server.vercel.app/enrollments", enrollment)
         .then((res) => {
           if (res.data.insertedId) {
             Swal.fire({

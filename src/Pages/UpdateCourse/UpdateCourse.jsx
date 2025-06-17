@@ -16,7 +16,7 @@ const UpdateCourse = () => {
     updatedCourse.totalSeats = parseInt(updatedCourse.totalSeats);
     
 
-    fetch(`http://localhost:3000/courses/${_id}`, {
+    fetch(`https://course-station-server.vercel.app/courses/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
