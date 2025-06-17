@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import SimpleSlider from "../../SimpleSlider";
 import axios from "axios";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [latestCourses, setLatestCourses] = useState([]);
@@ -49,6 +50,10 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home | Course Station</title>
+      </Helmet>
+
       <SimpleSlider />
 
       {/* Latest Courses Section */}

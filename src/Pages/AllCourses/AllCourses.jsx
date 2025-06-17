@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import SingleCourse from "../SingleCourse/SingleCourse";
 import Loading from "../Loading";
+import { Helmet } from "react-helmet";
 
 const AllCourses = () => {
   const allCourses = useLoaderData();
@@ -17,6 +18,9 @@ const AllCourses = () => {
 
   return (
     <div className="p-5 md:p-10 lg:p-20">
+      <Helmet>
+        <title>All Courses</title>
+      </Helmet>
       <h1 className="text-5xl text-center font-bold eduvicfont">
         All Courses You Can Join Now
       </h1>

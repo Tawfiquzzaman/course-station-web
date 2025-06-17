@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/Authcontext/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "../Loading";
+import { Helmet } from "react-helmet";
 
 const CourseDetails = () => {
   const { title, imageURL, duration, description, _id } = useLoaderData();
@@ -82,6 +83,9 @@ const CourseDetails = () => {
 
   return (
     <div className="p-10 md:p-10 lg:p-20">
+      <Helmet>
+        <title>Course Details</title>
+      </Helmet>
       <div className="card bg-[#D1D8BE] mt-10 max-w-xl md:max-w-3xl lg:max-w-4xl shadow-sm mx-auto">
         <figure className="px-10 pt-10">
           <img src={imageURL} alt="Shoes" className="rounded-xl" />

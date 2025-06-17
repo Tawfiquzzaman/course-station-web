@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router";
 
 const SingleCourse = ({course}) => {
@@ -7,6 +8,9 @@ const SingleCourse = ({course}) => {
 
   return (
     <div className="card card-side bg-base-100 shadow-sm">
+      <Helmet>
+        <title>Course</title>
+      </Helmet>
       <figure className="">
         <img className="w-40 md:w-60 h-25 md:h-38 p-3 object-cover"
           src={imageURL}

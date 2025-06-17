@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Authcontext/AuthContext";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const EnrolledCourses = () => {
   const { user } = useContext(AuthContext);
@@ -27,6 +28,9 @@ const EnrolledCourses = () => {
 
   return (
     <div className="p-5 md:p-10">
+      <Helmet>
+        <title>Enrolled Courses</title>
+      </Helmet>
       <h1 className="text-3xl md:text-5xl text-center font-bold eduvicfont mb-10">
         All Courses Enrolled By{" "}
         <span className="text-red-600 eduvicfont">

@@ -5,6 +5,7 @@ import SingleCourse from "../SingleCourse/SingleCourse";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet";
 
 const ManageMyCourse = () => {
   const { user } = useContext(AuthContext);
@@ -64,6 +65,9 @@ const ManageMyCourse = () => {
 
   return (
     <div className="p-5 md:p-25">
+      <Helmet>
+        <title>Manage Courses</title>
+      </Helmet>
       <h1 className="text-5xl text-center font-bold eduvicfont mb-10">
         All Courses Added By{" "}
         <span className="text-red-600 eduvicfont">

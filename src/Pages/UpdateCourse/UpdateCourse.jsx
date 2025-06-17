@@ -3,6 +3,7 @@ import React from "react";
 import update from "../../assets/animation/update.json";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const UpdateCourse = () => {
   const { title, imageURL, duration, description, _id } = useLoaderData();
@@ -37,6 +38,9 @@ const UpdateCourse = () => {
 
   return (
     <div className="p-20">
+      <Helmet>
+        <title>Update Course</title>
+      </Helmet>
       <h1 className="text-5xl text-center font-bold eduvicfont">
         Fill The Form To Update Course
       </h1>

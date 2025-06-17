@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/Authcontext/AuthContext";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const { createUser } = use(AuthContext);
@@ -75,6 +76,9 @@ const Register = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
+      <Helmet>
+        <title>Authentication | Register</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row-reverse p-20">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold eduvicfont">

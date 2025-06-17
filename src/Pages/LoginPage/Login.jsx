@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.init";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const provider = new GoogleAuthProvider();
@@ -74,6 +75,9 @@ const Login = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
+      <Helmet>
+              <title>Authentication | Login</title>
+            </Helmet>
       <div className="hero-content flex-col lg:flex-row-reverse p-20">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold eduvicfont">

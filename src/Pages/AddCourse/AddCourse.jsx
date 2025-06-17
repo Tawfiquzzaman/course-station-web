@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import addGroup from "../../assets/animation/addGroup.json";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/Authcontext/AuthContext";
+import { Helmet } from "react-helmet";
 
 const AddCourse = () => {
 
@@ -54,6 +55,9 @@ const AddCourse = () => {
 
   return (
     <div className="p-10 mt-15 md:p-20 md:mt-10">
+      <Helmet>
+        <title>Add Course</title>
+      </Helmet>
       <h1 className="text-5xl text-center font-bold eduvicfont">
         Fill The Form To Add New Course
       </h1>
