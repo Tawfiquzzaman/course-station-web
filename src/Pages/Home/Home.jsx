@@ -12,13 +12,13 @@ const Home = () => {
   useEffect(() => {
     // Fetch Latest Courses
     axios
-      .get("https://course-station-server.vercel.app/courses?latest=true")
+      .get("http://localhost:3000/courses?latest=true")
       .then((res) => setLatestCourses(res.data))
       .catch((err) => console.error(err));
 
     // Fetch Popular Courses
     axios
-      .get("https://course-station-server.vercel.app/courses?popular=true")
+      .get("http://localhost:3000/courses?popular=true")
       .then((res) => setPopularCourses(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -54,7 +54,9 @@ const Home = () => {
         <title>Home | Course Station</title>
       </Helmet>
 
-      <SimpleSlider />
+      <div className="mt-20">
+        <SimpleSlider />
+      </div>
 
       {/* Latest Courses Section */}
       <div className="max-w-6xl mx-auto px-4 py-10">

@@ -12,22 +12,20 @@ const CourseDetails = () => {
 
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [checkingEnrollment, setCheckingEnrollment] = useState(true);
+  const [seatsLeft, setSeatsLeft] = useState(null);
 
   useEffect(() => {
     if (!user) {
       setIsEnrolled(false);
       setCheckingEnrollment(false);
-
       return;
     }
 
-    // Assuming your backend has an endpoint to check enrollment by user & courseId
     axios
       .get(
-        `https://course-station-server.vercel.app/enrollments/check?userEmail=${user.email}&courseId=${_id}`
+        `http://localhost:3000/enrollments/check?userEmail=${user.email}&courseId=${_id}`
       )
       .then((res) => {
-        // res.data.enrolled is assumed boolean from API
         setIsEnrolled(res.data.enrolled);
       })
       .catch((err) => {
@@ -37,6 +35,19 @@ const CourseDetails = () => {
       .finally(() => setCheckingEnrollment(false));
   }, [user, _id]);
 
+  // Fetch seats left
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/courses/${_id}/seats`)
+      .then((res) => {
+        setSeatsLeft(res.data.seatsLeft);
+      })
+      .catch((err) => {
+        console.error("Failed to load seat count", err);
+        setSeatsLeft(0);
+      });
+  }, [_id, isEnrolled]);
+
   const handleEnroll = () => {
     const enrollment = {
       userEmail: user.email,
@@ -45,10 +56,9 @@ const CourseDetails = () => {
       courseName: title,
       enrolledDate: new Date(),
     };
-    console.log(enrollment);
 
     axios
-      .post("https://course-station-server.vercel.app/enrollments", enrollment)
+      .post("http://localhost:3000/enrollments", enrollment)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({
@@ -68,18 +78,26 @@ const CourseDetails = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
-        Swal.fire({
-          title: "Something Went Wrong!",
-          icon: "error",
-          draggable: true,
-        });
-        setIsEnrolled(true);
+        if (
+          err.response?.status === 409 &&
+          err.response?.data?.message === "No seats left"
+        ) {
+          Swal.fire({
+            title: "No seats left!",
+            icon: "error",
+            confirmButtonText: "Okay",
+          });
+        } else {
+          Swal.fire({
+            title: "Something Went Wrong!",
+            icon: "error",
+            draggable: true,
+          });
+        }
       });
   };
-  if (checkingEnrollment) {
-    return <Loading />;
-  }
+
+  if (checkingEnrollment) return <Loading />;
 
   return (
     <div className="p-10 md:p-10 lg:p-20">
@@ -96,6 +114,37 @@ const CourseDetails = () => {
             Course Duration : <span className="font-bold">{duration}</span>
           </button>
           <p className="my-5">{description}</p>
+          {seatsLeft === 0 ? (
+            <p className="text-red-600 font-semibold text-lg mt-4">
+              No seats left
+            </p>
+          ) : (
+            <div className="card-actions flex flex-col items-center">
+              {seatsLeft !== null && (
+                <p className="text-green-700 font-medium mb-2">
+                  {seatsLeft} seat{seatsLeft > 1 ? "s" : ""} left
+                </p>
+              )}
+              <button
+                onClick={handleEnroll}
+                className="btn bg-[#819A91] hover:bg-[#FCECDD] mt-3"
+                disabled={!user || isEnrolled || checkingEnrollment}
+                title={
+                  !user
+                    ? "You must be logged in to enroll"
+                    : isEnrolled
+                    ? "You have already enrolled in this course"
+                    : ""
+                }
+              >
+                {isEnrolled
+                  ? "Enrolled"
+                  : checkingEnrollment
+                  ? "Checking..."
+                  : "Enroll Now"}
+              </button>
+            </div>
+          )}
           <div className="card-actions">
             <button
               onClick={handleEnroll}

@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         },
         {
           path: '/allCourses',
-          loader: () => fetch('https://course-station-server.vercel.app/courses'),
+          loader: () => fetch('http://localhost:3000/courses'),
           Component: AllCourses,
           errorElement: <Error />,
         },
@@ -61,14 +61,14 @@ const router = createBrowserRouter([
         },
         {
           path: '/updateCourse/:id',
-          loader: ({params}) => fetch(`https://course-station-server.vercel.app/courses/${params.id}`),
+          loader: ({params}) => fetch(`http://localhost:3000/courses/${params.id}`),
           // Component: UpdateCourse,
           element: <PrivateRoute><UpdateCourse></UpdateCourse></PrivateRoute>,
           errorElement: <Error></Error>
         },
         {
           path: '/courseDetails/:id',
-          loader: ({params}) => fetch(`https://course-station-server.vercel.app/courses/${params.id}`),
+          loader: ({params}) => fetch(`http://localhost:3000/courses/${params.id}`),
           element: <PrivateRoute><CourseDetails></CourseDetails></PrivateRoute>,
           errorElement: <Error></Error>
         },
