@@ -21,7 +21,6 @@ Key Features:
 
 Purpose: Enroll to the courses got easier then before.
 
-Live URL: https://effulgent-palmier-f738fa.netlify.app/
 =======
 ## Live Site Link: https://mrtopic-course-station.netlify.app/
 
