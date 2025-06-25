@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
     const links = (
@@ -8,16 +9,16 @@ const Footer = () => {
         <NavLink  to='/' className="link link-hover">Home</NavLink>
       </li>
       <li>
-        <NavLink to='' className="link link-hover">All Courses</NavLink>
+        <NavLink to='/allCourses' className="link link-hover">All Courses</NavLink>
       </li>
       <li>
-        <NavLink to='' className="link link-hover">Add Course</NavLink>
+        <NavLink to='/addCourse' className="link link-hover">Add Course</NavLink>
       </li>
       <li>
-        <NavLink to='' className="link link-hover">My Courses</NavLink>
+        <NavLink to='/manageCourses' className="link link-hover">Manage Courses</NavLink>
       </li>
       <li>
-        <NavLink to='' className="link link-hover">Contact</NavLink>
+        <NavLink to='/myEnrolledCourses' className="link link-hover">Enrolled Courses</NavLink>
       </li>
       <li>
         <NavLink to='' className="link link-hover">Career</NavLink>
@@ -29,9 +30,9 @@ const Footer = () => {
   <aside>
     
      
-      <NavLink to='/' className="btn btn-ghost text-xl font-semibold">Course <span className="w-10"><img src="/public/logo.png" alt="logo" /></span> STATION</NavLink>
+      <NavLink to='/' className="btn btn-ghost text-xl font-semibold">CoUrse <span className="w-10"><img src="/logo.png" alt="logo" /></span> STATION</NavLink>
     
-    <p>
+    <p className='ml-4'>
       Course Station Ltd.
       <br />
       Complete Guideline For Every Learning
@@ -51,10 +52,18 @@ const Footer = () => {
     </ul>
   </nav>
   <nav>
-    <h6 className="footer-title">Legal</h6>
-    <a className="link link-hover">Terms of use</a>
-    <a className="link link-hover">Privacy policy</a>
-    <a className="link link-hover">Cookie policy</a>
+    <h6 className="footer-title">Social</h6>
+    <div className="flex gap-4 mt-2">
+    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-xl text-blue-600 hover:text-blue-800">
+      <FaFacebook />
+    </a>
+    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-800 hover:text-black">
+      <FaGithub />
+    </a>
+    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-xl text-blue-700 hover:text-blue-900">
+      <FaLinkedin />
+    </a>
+  </div>
   </nav>
 </footer>
     );
