@@ -16,6 +16,14 @@ If you are developing a production application, we recommend using TypeScript wi
 ## Description:
 CourseStation is a full-stack course management platform inspired by e-learning sites like Udemy. It allows users to browse, enroll in, and manage online courses. The application features user authentication, secure data handling, and a user-friendly interface for both learners and instructors.
 
+## Web page
+
+![image](https://github.com/user-attachments/assets/f62a2386-8083-4bf6-aa7c-402e33a064fd)
+
+![image](https://github.com/user-attachments/assets/2e592140-12b7-4b17-ab74-297d80c82b2b)
+
+
+
 ## 🔍 Key Features
 
 - 🎓 **Course Management** – Add, edit, and delete courses with detailed information.
