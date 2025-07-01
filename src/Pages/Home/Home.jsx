@@ -54,7 +54,7 @@ const Home = () => {
         <title>Home | Course Station</title>
       </Helmet>
 
-      <div className="mt-20">
+      <div className="mt-20 min-h-[70vh] flex items-center">
         <SimpleSlider />
       </div>
 
@@ -65,8 +65,8 @@ const Home = () => {
         </h1>
         <div className="border-b-1 opacity-45 border-dashed mb-5"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {latestCourses.map(renderCourseCard)}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {latestCourses.slice(0, 8).map(renderCourseCard)}
         </div>
       </div>
 
@@ -77,8 +77,8 @@ const Home = () => {
         </h1>
         <div className="border-b-1 opacity-45 border-dashed mb-5"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {popularCourses.map(renderCourseCard)}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {popularCourses.slice(0, 8).map(renderCourseCard)}
         </div>
       </div>
 
