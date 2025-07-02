@@ -1,9 +1,13 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../context/Authcontext/AuthContext";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
+
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
 
   const handleSignOut = () => {
     signOutUser()
@@ -14,6 +18,15 @@ const Navbar = () => {
         console.log(error);
       });
   };
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
 
   const publicLinks = (
     <>
@@ -107,6 +120,13 @@ const Navbar = () => {
         <div className="navbar-end space-x-2 mr-4">
           {user ? (
             <div className="flex items-center gap-3">
+              {/* Dark light theme toggle button */}
+              <button
+                onClick={() => setIsDark(!isDark)}
+                className="btn btn-sm rounded-full bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
+              >
+                {isDark ? "☀ Light" : "🌙 Dark"}
+              </button>
               {/* User Profile Picture */}
               {user.photoURL && (
                 <img
@@ -115,6 +135,8 @@ const Navbar = () => {
                   className="w-10 h-10 rounded-full border border-gray-300 shadow"
                 />
               )}
+
+              
 
               {/* Sign Out Button */}
               <button
